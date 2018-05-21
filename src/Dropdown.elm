@@ -27,9 +27,9 @@ defaultSettings =
     { placeholder = "Pick an option", isDisabled = False }
 
 
-init : ( Model, Cmd Msg )
+init : Model
 init =
-    ( { isDropped = False }, Cmd.none )
+    ({ isDropped = False })
 
 
 type Msg
@@ -42,14 +42,14 @@ type DropdownEvent
     | Changed (Maybe String)
 
 
-update : Model -> Msg -> ( Model, Cmd Msg, DropdownEvent )
+update : Model -> Msg -> ( Model, DropdownEvent )
 update model msg =
     case msg of
         ToggleDropdown ->
-            ( { model | isDropped = not model.isDropped }, Cmd.none, NoChange )
+            ( { model | isDropped = not model.isDropped }, NoChange )
 
         ItemPicked value ->
-            ( { model | isDropped = False }, Cmd.none, Changed (Just value) )
+            ( { model | isDropped = False }, Changed (Just value) )
 
 
 dropdownItemView : String -> Html Msg
